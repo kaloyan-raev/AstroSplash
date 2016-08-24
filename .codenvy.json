@@ -1,0 +1,132 @@
+{
+  "v": "4.0",
+  "name": "Astro Splash Factory",
+  "workspace": {
+    "environments": [
+      {
+        "name": "wss",
+        "machineConfigs": [
+          {
+            "limits": {
+              "ram": 2000
+            },
+            "name": "dev-machine",
+            "type": "docker",
+            "source": {
+              "location": "kaloyanraev/che-zendserver",
+              "type": "image"
+            },
+            "dev": true,
+            "servers": [],
+            "envVariables": {},
+            "links": []
+          }
+        ]
+      }
+    ],
+    "defaultEnv": "wss",
+    "projects": [
+      {
+        "links": [],
+        "name": "astro-splash",
+        "attributes": {},
+        "type": "blank",
+        "source": {
+          "location": "https://github.com/kaloyan-raev/AstroSplash.git",
+          "type": "git",
+          "parameters": {}
+        },
+        "path": "/astro-splash",
+        "problems": [],
+        "mixins": [
+          "git"
+        ]
+      }
+    ],
+    "name": "wss",
+    "commands": [
+      {
+        "commandLine": "sudo /usr/local/zend/bin/zendctl.sh start",
+        "name": "start zend server",
+        "attributes": {
+          "previewUrl": "http://${server.port.80}"
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "sudo /usr/local/zend/bin/zendctl.sh stop",
+        "name": "stop zend server",
+        "attributes": {
+          "previewUrl": ""
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "sudo /usr/local/zend/bin/zendctl.sh restart",
+        "name": "restart zend server",
+        "attributes": {
+          "previewUrl": "http://${server.port.80}"
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "sudo rm -rf /projects/astro-splash/data/doctrine-cache",
+        "name": "clean doctrine cache",
+        "attributes": {
+          "previewUrl": ""
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "php /projects/astro-splash/bin/update.php",
+        "name": "update images",
+        "attributes": {
+          "previewUrl": ""
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "cd /projects/astro-splash && chmod 777 data && echo -e \"<VirtualHost *:80>\n    DocumentRoot /projects/astro-splash/public\n    SetEnv APPLICATION_ENV 'development'\n    <Directory /projects/astro-splash/public>\n        DirectoryIndex index.php\n        AllowOverride All\n        Require all granted\n    </Directory>\n</VirtualHost>\" | sudo tee /etc/apache2/sites-available/000-default.conf && sudo sed -i 's#zray.zendserver_ui_url=#zray.zendserver_ui_url=http://${server.port.10081}/ZendServer#g' /usr/local/zend/etc/conf.d/zray.ini && composer update && grep -q 'extension=pcntl.so' /usr/local/zend/etc/php.ini || echo -e \"\nextension=pcntl.so\" | sudo tee -a /usr/local/zend/etc/php.ini && php bin/update.php && sudo /usr/local/zend/bin/zendctl.sh start",
+        "name": "auto setup",
+        "attributes": {
+          "previewUrl": "http://${server.port.80}"
+        },
+        "type": "custom"
+      }
+    ],
+    "links": []
+  },
+  "id": "xgodyyt7xrsoage9",
+  "ide": {
+    "onProjectsLoaded": {
+      "actions": [
+        {
+          "properties": {
+            "file": "/astro-splash/WORKSPACE.md"
+          },
+          "id": "openFile"
+        },
+        {
+          "properties": {
+            "name": "auto setup"
+          },
+          "id": "runCommand"
+        }
+      ]
+    },
+    "onAppClosed": {
+      "actions": [
+        {
+          "properties": {},
+          "id": "warnOnClose"
+        }
+      ]
+    }
+  },
+  "creator": {
+    "name": "Kaloyan Raev",
+    "email": "kaloyan.raev@roguewave.com",
+    "created": 1471352625625,
+    "userId": "user16nwh76oz09cjsb8"
+  }
+}
