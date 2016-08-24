@@ -96,7 +96,6 @@
     ],
     "links": []
   },
-  "id": "xgodyyt7xrsoage9",
   "ide": {
     "onProjectsLoaded": {
       "actions": [
@@ -122,11 +121,5 @@
         }
       ]
     }
-  },
-  "creator": {
-    "name": "Kaloyan Raev",
-    "email": "kaloyan.raev@roguewave.com",
-    "created": 1471352625625,
-    "userId": "user16nwh76oz09cjsb8"
   }
 }
