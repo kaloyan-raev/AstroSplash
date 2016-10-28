@@ -30,7 +30,7 @@
         "links": [],
         "name": "astro-splash",
         "attributes": {},
-        "type": "blank",
+        "type": "php",
         "source": {
           "location": "https://github.com/kaloyan-raev/AstroSplash.git",
           "type": "git",
